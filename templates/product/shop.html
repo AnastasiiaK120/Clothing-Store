@@ -1,0 +1,71 @@
+
+
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+
+    <section class="shop">
+        <div class="container-product">
+            <div class="product-row">
+                <div class="leftside">
+                    <div class="search">
+                        <h3 class="mb-3 text-xl uppercase">Search</h3>
+
+                <form>
+                    <div class="flex">
+                        <input type="text" class="p-4 bg-gray-100 border-0" placeholder="Search...">
+                        <buton class="p-4 bg-gray-100  border-0">
+
+                        </buton>
+                    </div>
+                </form>
+                    </div>
+                    <div class="categories">
+                        <h3 class="mt-6 mb-3 text-xl uppercase">Categories</h3>
+
+                <ul class="space-y-2">
+
+                    <li><a href="#" class="text-pink-500">All</a></li>
+                    {% for category in categories %}
+                    <li><a href="#" class="text-pink-500">{{category.name}}</a></li>
+                    {% endfor %}
+                </ul>
+                    </div>
+                </div>
+
+                <div class="product-info-shop" style="padding-left: 50px;">
+                    <div class="section-header">
+                        <h2 class="section-header__title">Clothes</h2>
+                        <div class="section-header__description">
+                            <p>dolor sit amet</p>
+                        </div>
+                    </div>
+                    <div class="products-wrapper">
+                        {% for product in products %}
+                        <a href="#" class="product-link">
+                        <div class="product">
+                            <img src="{{product.image.url}}" alt="" class="product__img">
+
+                            <h4 class="product__title">{{product.name}}</h4>
+                            <div class="product_price">
+                                <span class="product__price">${{product.price}}</span>
+                            </div>
+                        </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+{% endblock content %}
+

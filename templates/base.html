@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegance Shop</title>
+    <link href="{% static '/css/main.css' %}" rel="stylesheet">
+    <link href="{% static '/css/product_detail.css' %}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Playfair+Display&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="nav">
+        <div class="container">
+            <div class="nav_row">
+                <a href="#" class="nav_logo">
+                    Elegance
+                </a>
+                <ul class="nav_list">
+                    <li class="nav_item">
+                        <a href="#" class="nav_link">Collection</a>
+                    </li>
+                    <li class="nav_item">
+                        <a href="#" class="nav_link">Women</a>
+                    </li>
+                    <li class="nav_item">
+                        <a href="#" class="nav_link">FAQ</a>
+                    </li>
+                    <li class="nav_item">
+                        <a href="#" class="nav_link">Sale</a>
+                    </li>
+                </ul>
+                <div class="nav_card">
+                    <a href="#" class="nav__cart__link">
+                        <span class="nav__cart-number">3</span>
+                        <img src="./img/icons/feather-icon-shopping-cart.svg" alt="Cart">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__column">
+
+                <nav class="footer__nav">
+                    <a href="#">Your account</a>
+                    <a href="#">Terms of use</a>
+                    <a href="#">Contact</a>
+                </nav>
+                <div class="footer__socials">
+                    <a href="#" class="footer__socials-link">
+                        <img src="./img/socials/fb.svg" alt="">
+                    </a>
+                    <a href="#" class="footer__socials-link">
+                        <img src="./img/socials/pin.svg" alt="">
+                    </a>
+                    <a href="#" class="footer__socials-link">
+                        <img src="./img/socials/twi.svg" alt="">
+                    </a>
+                    <a href="#" class="footer__socials-link">
+                        <img src="./img/socials/Vector.svg" alt="">
+                    </a>
+                </div>
+                <div class="footer__copyright">
+                    <p>© Elegance.com. AK</p>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+</html>

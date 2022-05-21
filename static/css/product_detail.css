@@ -1,0 +1,135 @@
+.section-product__detail {
+    padding-top: 120px;
+	padding-bottom: 168px;
+ 
+}
+
+.container-product {
+    width: 1400px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+.product-row {
+    display: flex;
+	justify-content: space-between;
+}
+.image-container {
+    position: relative;
+	margin-right: 86px;
+	padding-left: 60px;
+	padding-bottom: 74px;
+
+}
+
+.image-container img {
+    object-fit: cover;
+    width: 562px;
+    height: 748px;
+}
+
+.product-info {
+    max-width: 584px;
+}
+
+
+.title-first {
+    margin: 0;
+    margin-bottom: 40px;
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 44px;
+    text-align: left;
+    
+}
+
+.price {
+   
+    text-align: right;
+    display: inline-block;
+    margin-bottom: 1;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+}
+
+.select-form select {
+    margin-bottom: 25px;
+    font-family: 'Courier New', Courier, monospace;
+    width: 20rem;
+    padding: .7rem;
+    border: 1px solid #ccc;
+    appearance: none;
+    outline: none;
+}
+
+
+
+
+.add-to-card-button-wrapper {
+  
+    text-align: left;
+}
+
+.button-add {
+    margin-bottom: 60px;
+    display: inline-block;
+    padding: 10px 40px 11px;
+    background-color: #000000;
+    border: 1 px  rgb(221, 108, 146);
+    border-radius: 4px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 1;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    width: 165.86px;
+    height: 47.75px;
+    left: 669px;
+    top: 546.25px;
+    font-family: 'Montserrat';
+
+    color :#FFFFFF;
+    transition: background-color 0.2s ease-in, color 0.2s ease-in;
+}
+
+.button-add:hover {
+    background-color: grey;
+    color: #FFFFFF;
+}
+
+
+.product-row {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+
+
+.product__descr {
+   
+    max-width: 530px;
+    line-height: 144.5%;
+}
+    
+.product__descr p {
+    margin-top: 0;
+    max-width: 530px;
+line-height: 144.5%;
+
+}
+
+
+.product-info-shop {
+    /* max-width: 584px; */
+}
