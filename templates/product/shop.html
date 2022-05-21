@@ -27,10 +27,9 @@
                         <h3 class="mt-6 mb-3 text-xl uppercase">Categories</h3>
 
                 <ul class="space-y-2">
-
-                    <li><a href="#" class="text-pink-500">All</a></li>
+                    <li><a href="{% url 'listings:shop' %}" class="{% if not active_category %}text-pink-500{% else %}text-gray-500{% endif %}">All</a></li>
                     {% for category in categories %}
-                    <li><a href="#" class="text-pink-500">{{category.name}}</a></li>
+                    <li><a href="{% url 'listings:shop' %}?category={{category.slug}}" class="{% if category.slug == active_category %}text-pink-500{% else %}text-gray-500{% endif %}">{{category.name}}</a></li>
                     {% endfor %}
                 </ul>
                     </div>
@@ -45,7 +44,7 @@
                     </div>
                     <div class="products-wrapper">
                         {% for product in products %}
-                        <a href="#" class="product-link">
+                        <a href="{% url 'listings:product' product.slug %}" class="product-link">
                         <div class="product">
                             <img src="{{product.image.url}}" alt="" class="product__img">
 
