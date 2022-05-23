@@ -41,7 +41,8 @@ def cart_detail(request):
     cart = get_cart(request)
     product_ids = cart.keys()
     products = Product.objects.filter(id__in=product_ids)
-    temp_cart = cart.cope()
+    temp_cart = cart.copy()
+    cart_total_price = 0
 
     for product in products:
         cart_item = temp_cart[str(product.id)]
@@ -49,7 +50,8 @@ def cart_detail(request):
         cart_item['total_price'] = (Decimal(cart_item['price']) * cart_item['quantity'])
         cart_total_price = sum(Decimal(item['price']) * item['quantity'] for item in temp_cart.values())
 
-    return render(request, 'detail.html', {'cart': temp_cart.values(),
+        cart_item['update_quantity_form'] = CartAddProductForm(initial={'quantity': cart_item['quantity']})
+    return render(request, 'carts/detail.html', {'cart': temp_cart.values(),
                                            'cart_total_price': cart_total_price})
 
 

@@ -4,6 +4,7 @@ from django.contrib import messages
 
 from .models import Category, Product, Review
 from .forms import ReviewForm
+from cart.forms import CartAddProductForm
 
 
 def front(request):
@@ -28,15 +29,17 @@ def product_detail(request, slug):
 
     if request.method == 'POST':
         review_form = ReviewForm(request.POST)
+
         if review_form.is_valid():
             cf = review_form.cleaned_data
-            author = 'Ana'
-            Review.objects.create(product=product, author=author, text=cf['text'], rating=cf['rating'])
+            author_name = 'Anonymous'
+            Review.objects.create(product=product, author=author_name, text=cf['text'], rating=cf['rating'])
         return redirect('listings:product', slug=slug)
     else:
-            review_form = ReviewForm()
+        review_form = ReviewForm()
+        cart_product_form = CartAddProductForm()
 
-    return render(request, 'product/product_detail.html', {'product': product, 'review_form': review_form})
+    return render(request, 'product/product_detail.html', {'product': product, 'review_form': review_form, 'cart_product_form': cart_product_form})
 
 
 def submit_review(request, product):

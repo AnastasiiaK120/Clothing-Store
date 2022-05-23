@@ -53,9 +53,34 @@
                         </div>
                     </form>
                     <div class="add-to-card-button-wrapper">
-                        <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+						<form action="{% url 'cart:cart_add' product.id %}" method="post">
+							{% csrf_token %}
+
+<!--					<div class="number-input md-number-input">-->
+<!--  <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>-->
+<!--  <input class="quantity" min="0" name="quantity" value="1" type="number">-->
+<!--  <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>-->
+<!--</div>-->
+
+
                         <a class="btn btn-outline-success" href="#"></a>
-                    </div>
+							<div class="col-lg-12">
+                            <h6>Quantity :</h6>
+								{{ cart_product_form.quantity }}
+<!--                            <input type="number" class="form-control text-center w-100" value="1">-->
+                        </div>
+                        <div class="col-lg-12 mt-3">
+                            <div class="row">
+                                <div class="col-lg-6 pb-2">
+									<button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+<!--                                    <a href="#" class="btn btn-danger w-100">Add To Cart</a>-->
+                                </div>
+
+                            </div>
+                        </div>
+
+					</form>
+					</div>
                     <div class="product__descr">
                         {% if product.description %}
                             <p>{{product.description}}</p>
