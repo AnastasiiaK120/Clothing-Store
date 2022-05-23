@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<body>
+		<div class="col-md-4 container bg-default">
+
+			<h4 class="my-4">
+					Billing Address
+			</h4>
+
+			<form method="post">
+				{% csrf_token %}
+				<div class="form-row">
+					<div class="col-md-6 form-group">
+						<label for="firstname">First Name</label>
+						{{ order_form.first_name}}
+						<div class="invalid-feedback">
+							Valid first name is required.
+						</div>
+					</div>
+
+					<div class="col-md-6 form-group">
+						<label for="lastname">Last Name</label>
+						{{ order_form.first_name}}
+						<div class="invalid-feedback">
+							Valid last name is required.
+						</div>
+					</div>
+				</div>
+
+
+
+
+
+				<div class="form-group">
+						<label for="email">Email</label>
+						{{ order_form.email}}
+				</div>
+
+				<div class="form-group">
+					<label for="text-muted">Phone number</label>
+						{{ order_form.telephone}}
+					<div class="invalid-feedback">
+						Please enter your shipping address.
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="address">Address</label>
+						{{ order_form.address}}
+					<div class="invalid-feedback">
+						Please enter your shipping address.
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="city">City</label>
+						{{ order_form.city}}
+					<div class="invalid-feedback">
+						Please enter your city name.
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="postcode">Postal Code</label>
+						{{ order_form.postal_code}}
+					<div class="invalid-feedback">
+						Please enter your postal code.
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="state">State</label>
+						{{ order_form.state}}
+					<div class="invalid-feedback">
+						State
+					</div>
+				</div>
+
+				<hr>
+				<h4 class="py-2 font-weight-bold text-grey">
+					Transport:
+				</h4>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="radiobtn">
+							<input type="radio" id="id_transport_0" name="transport"
+								   value="Courier delivery" amount="{{ transport_cost }}"
+								   checked onclick="setTotalCost()"/>
+							<label for="id_transport_0">Courier delivery
+								<span class="text-danger float-right pr-3 font-weight-bold">
+									${{transport_cost}}
+								</span>
+							</label>
+						</div>
+						<div class="radiobtn">
+							<input type="radio" id="id_transport_1" name="transport"
+								   value="Recipient pickup" amount="free"
+								   onclick="setTotalCost()"/>
+							<label for="id_transport_0">Recipient pickup
+								<span class="text-green float-right pr-3 font-weight-bold">
+									free
+								</span>
+							</label>
+						</div>
+					</div>
+				</div>
+
+
+
+
+
+				<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+					<hr class="mb-4">
+
+					<button class="btn btn-primary bt-lg btn-block" type="submit">Continue to Checkout</button>
+				<hr>
+			</form>
+		</div>
+</body>
+
+{% endblock %}
