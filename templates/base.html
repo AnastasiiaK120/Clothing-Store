@@ -28,6 +28,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="{% static 'js/jquery-3.3.1.min.js' %}" type="text/javascript"></script>
 
+
 <script type="text/javascript">
 /// some script
 
@@ -38,6 +39,22 @@ $(document).ready(function() {
 });
 // jquery end
 </script>
+
+    <!-- Font Awesome -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css"
+  rel="stylesheet"
+/>
 <!--    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
 
 <!--       &lt;!&ndash; Font Awesome &ndash;&gt;-->
@@ -77,6 +94,8 @@ $(document).ready(function() {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Playfair+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav class="nav">
@@ -100,8 +119,8 @@ $(document).ready(function() {
                     </li>
                 </ul>
                 <div class="nav_card">
-                    <a href="#" class="nav__cart__link">
-                        <span class="nav__cart-number">3</span>
+                    <a href="{% url 'cart:cart_detail' %}" class="nav__cart__link">
+                        <span class="nav__cart-number">{{ cart_total_price|floatformat:2 }}</span>
                         <img src="./img/icons/feather-icon-shopping-cart.svg" alt="Cart">
                     </a>
                 </div>

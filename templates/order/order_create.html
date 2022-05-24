@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<body>
+
 		<div class="col-md-4 container bg-default">
 
 			<h4 class="my-4">
@@ -12,72 +12,9 @@
 
 			<form method="post">
 				{% csrf_token %}
-				<div class="form-row">
-					<div class="col-md-6 form-group">
-						<label for="firstname">First Name</label>
-						{{ order_form.first_name}}
-						<div class="invalid-feedback">
-							Valid first name is required.
-						</div>
-					</div>
-
-					<div class="col-md-6 form-group">
-						<label for="lastname">Last Name</label>
-						{{ order_form.first_name}}
-						<div class="invalid-feedback">
-							Valid last name is required.
-						</div>
-					</div>
-				</div>
+				{{ order_form.as_p }}
 
 
-
-
-
-				<div class="form-group">
-						<label for="email">Email</label>
-						{{ order_form.email}}
-				</div>
-
-				<div class="form-group">
-					<label for="text-muted">Phone number</label>
-						{{ order_form.telephone}}
-					<div class="invalid-feedback">
-						Please enter your shipping address.
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label for="address">Address</label>
-						{{ order_form.address}}
-					<div class="invalid-feedback">
-						Please enter your shipping address.
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label for="city">City</label>
-						{{ order_form.city}}
-					<div class="invalid-feedback">
-						Please enter your city name.
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label for="postcode">Postal Code</label>
-						{{ order_form.postal_code}}
-					<div class="invalid-feedback">
-						Please enter your postal code.
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label for="state">State</label>
-						{{ order_form.state}}
-					<div class="invalid-feedback">
-						State
-					</div>
-				</div>
 
 				<hr>
 				<h4 class="py-2 font-weight-bold text-grey">
@@ -108,30 +45,14 @@
 					</div>
 				</div>
 
-
-
-
-
 				<hr>
-
-
-
-
-
-
-
-
-
-
-
-
 
 					<hr class="mb-4">
 
-					<button class="btn btn-primary bt-lg btn-block" type="submit">Continue to Checkout</button>
+				<button type="submit" class="btn btn-primary bt-lg btn-block" >Continue to Checkout</button>
 				<hr>
 			</form>
 		</div>
-</body>
 
-{% endblock %}
+
+{% endblock content %}
