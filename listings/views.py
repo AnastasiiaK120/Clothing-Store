@@ -33,6 +33,9 @@ def product_detail(request, slug):
         if review_form.is_valid():
             cf = review_form.cleaned_data
             author_name = 'Anonymous'
+            # if request.user.is_authenticated:
+            #     author_name = request.user.first_name
+
             Review.objects.create(product=product, author=author_name, text=cf['text'], rating=cf['rating'])
         return redirect('listings:product', slug=slug)
     else:
