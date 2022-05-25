@@ -143,4 +143,6 @@ CART_ID = 'cart'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-LOGIN_URL = 'login'
+# LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'listings:shop'
+LOGOUT_REDIRECT_URL = 'listings:shop'
