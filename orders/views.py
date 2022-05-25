@@ -1,9 +1,11 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from decimal import Decimal
 from django.contrib.admin.views.decorators import staff_member_required
+
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 import weasyprint
+from store.decorators import user_create_order
 from .models import OrderItems, Order, Product
 from .forms import OrderCreateForm
 from cart.views import get_cart, cart_clear
@@ -25,6 +27,9 @@ def order_create(request):
                 transport_cost = 0
 
             order = order_form.save(commit=False)
+            if request.user.is_authenticated:
+                order.user = request.user
+
             order.transport_cost = Decimal(transport_cost)
             order.save()
 
@@ -45,6 +50,18 @@ def order_create(request):
                 return render(request, 'order/order_created.html', {'order': order})
     else:
         order_form = OrderCreateForm()
+        if request.user.is_authenticated:
+            initial_data = {
+                'first_name': request.user.first_name,
+                'last_name': request.user.last_name,
+                'email': request.user.email,
+                'telephone': request.user.profile.phone_number,
+                'address': request.user.profile.address,
+                'postal_code': request.user.profile.postal_code,
+                'city': request.user.profile.city,
+                'state': request.user.profile.state
+            }
+            order_form = OrderCreateForm(initial=initial_data)
 
     return render(request,
                   'order/order_create.html',
@@ -53,14 +70,48 @@ def order_create(request):
                    'transport_cost': transport_cost})
 
 
-@staff_member_required
+# @staff_member_required
+# def invoice_pdf(request, order_id):
+#     order = get_object_or_404(Order, id=order_id)
+#     response = HttpResponse(content_type='application/pdf')
+#     response['Content-Disposition'] = f'filename=order_{order.id}.pdf'
+#
+#     #generate pdf
+#     html = render_to_string('order/pdf.html', {'order': order})
+#     stylesheets = []
+#     weasyprint.HTML(string=html).write_pdf(response, stylesheets=stylesheets)
+#     return response
+#
+
+# @user_create_order
+# def customer_invoice_pdf(request, order_id):
+#     order = get_object_or_404(Order, id=order_id)
+#
+#     response = HttpResponse(content_type='application/pdf')
+#     response['Content-Disposition'] = f'filename=order_{order.id}.pdf'
+#
+#     # generate pdf
+#     html = render_to_string('order/pdf.html', {'order': order})
+#     stylesheets = []
+#     weasyprint.HTML(string=html).write_pdf(response, stylesheets=stylesheets)
+#     return response
+
 def invoice_pdf(request, order_id):
     order = get_object_or_404(Order, id=order_id)
+
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'filename=order_{order.id}.pdf'
 
-    #generate pdf
+    # generate pdf
     html = render_to_string('order/pdf.html', {'order': order})
     stylesheets = []
     weasyprint.HTML(string=html).write_pdf(response, stylesheets=stylesheets)
     return response
+
+def order_detail(request, order_id):
+    order = Order.objects.get(pk=order_id)
+    return render(
+        request,
+        'order/detail.html',
+        {'order': order}
+    )
