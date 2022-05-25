@@ -88,7 +88,7 @@ def profile(request):
             pass
         if user is None or user.id == request.user.id:
             user_form = UpdateUserForm(
-                instance=request.user.profile,
+                instance=request.user,
                 data=request.POST
             )
             profile_form = UpdateProfileForm(
