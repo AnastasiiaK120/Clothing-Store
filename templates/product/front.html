@@ -32,7 +32,7 @@
                 </div>
                 <div class="products-wrapper">
                         {% for product in products %}
-                        <a href="#" class="product-link">
+                        <a href="{% url 'listings:product' product.slug %}" class="product-link">
                         <div class="product">
                             <img src="{{product.image.url}}" alt="" class="product__img">
 
@@ -72,46 +72,21 @@
                     </div>
                 </div>
                 <div class="products-wrapper">
-                    <a href="#" class="product-link">
-                    <div class="product">
-                        <img src="./img/new_product.jpg" alt="" class="product__img">
-
-                        <h4 class="product__title">Shirt</h4>
-                        <div class="product_price">
-                            <span class="product__price">$95.00</span>
-                        </div>
-                    </div>
-                    </a>
-                    <a href="#" class="product-link">
+                   {% for product in products_old %}
+                        <a href="{% url 'listings:product' product.slug %}" class="product-link">
                         <div class="product">
-                            <img src="./img/new_product.jpg" alt="" class="product__img">
+                            <img src="{{product.image.url}}" alt="" class="product__img">
 
-                            <h4 class="product__title">Shirt</h4>
+                            <h4 class="product__title">{{product.name}}</h4>
                             <div class="product_price">
-                                <span class="product__price">$95.00</span>
+                                <span class="product__price">${{product.price}}</span>
                             </div>
                         </div>
                         </a>
-                        <a href="#" class="product-link">
-                            <div class="product">
-                                <img src="./img/new_product.jpg" alt="" class="product__img">
+                        {% endfor %}
+                    </div>
 
-                                <h4 class="product__title">Shirt</h4>
-                                <div class="product_price">
-                                    <span class="product__price">$95.00</span>
-                                </div>
-                            </div>
-                            </a>
-                            <a href="#" class="product-link">
-                                <div class="product">
-                                    <img src="./img/new_product.jpg" alt="" class="product__img">
 
-                                    <h4 class="product__title">Shirt</h4>
-                                    <div class="product_price">
-                                        <span class="product__price">$95.00</span>
-                                    </div>
-                                </div>
-                                </a>
 
                 </div>
 

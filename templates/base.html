@@ -101,61 +101,62 @@ $(document).ready(function() {
     <nav class="nav">
         <div class="container">
             <div class="nav_row">
-                <a href="{% url 'listings:shop' %}" class="nav_logo">
+                <a href="{% url 'listings:front' %}" class="nav_logo">
                     Elegance
                 </a>
                 <ul class="nav_list">
                     <li class="nav_item">
-                        <a href="#" class="nav_link">Collection</a>
+                        <a href="{% url 'listings:shop' %}" class="nav_link">Collection</a>
                     </li>
                     <li class="nav_item">
-                        <a href="#" class="nav_link">Women</a>
+                        <a href="{% url 'listings:shop' %}" class="nav_link">Shop</a>
                     </li>
-                    <li class="nav_item">
-                        <a href="#" class="nav_link">FAQ</a>
-                    </li>
-                    <li class="nav_item">
-                        <a href="#" class="nav_link">Sale</a>
-                    </li>
+
                 </ul>
-                <div class="account_link">
+
+                <div class="nav_card">
+                    <div class="account_link">
                     <ul class="nav_list">
                         {% if request.user.is_authenticated %}
-                            <li class="nav_item">
+                            <li class="nav_item" style="padding: 5px;">
                                 <a href="{% url 'profile' %}" class="nav_link">
                                     <i class="fas fa-user"></i>{{request.user.email}}
                                 </a>
                             </li>
-                        <li class="nav_item">
+                        <li class="nav_item" style="padding: 5px;">
                             <a href="{% url 'logout' %}" class="nav_link">
                                  <i class="fas fa-user"></i>Log out</a>
                         </li>
                         {% else %}
-                            <li class="nav_item">
+                            <li class="nav_item" style="padding: 5px;">
                                 <a href="{% url 'login' %}" class="nav_link">
                                     <i class="fas fa-user"></i>Log in</a>
                                 </a>
                             </li>
-                            <li class="nav_item">
+                            <li class="nav_item" style="padding: 5px;">
                                 <a href="{% url 'register' %}" class="nav_link">
                                     <i class="fas fa-user"></i>Register</a>
                             </li>
                         {% endif %}
-                    </ul>
-                </div>
-                <div class="nav_card">
-                    <a href="{% url 'cart:cart_detail' %}" class="nav__cart__link">
-                        <span class="nav__cart-number">{{ cart_total_price|floatformat:2 }}</span>
-                        <img src="./img/icons/feather-icon-shopping-cart.svg" alt="Cart">
+                            <li class="nav_item">
+                                <a href="{% url 'cart:cart_detail' %}" class="nav__cart__link">
+                        <span class="nav__cart-number" style="min-width: 50px;height: 20px;border-radius: 50%;">${{ cart_total_price|floatformat:2 }}</span>
+                        <img src="./img/icons/feather-icon-shopping-cart.png" alt="Cart">
                     </a>
+                            </li>
+                    </ul>
+
+                </div>
+
                 </div>
             </div>
         </div>
     </nav>
 
     {% block content %}
-    {% endblock %}
 
+    {% endblock %}
+{% block scripts %}
     <footer class="footer">
         <div class="container">
             <div class="footer__column">
@@ -191,9 +192,45 @@ $(document).ready(function() {
   type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"
 ></script>
+     <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        var stripe = Stripe('{{ stripe_pub_key }}');
+        var elements = stripe.elements();
+
+        var card = elements.create('card');
+
+        card.mount('#card-element');
+
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            stripe.createToken(card).then(function(result) {
+                if (result.error) {
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    stripeTokenHandler(result.token);
+                }
+            });
+        });
+
+        function stripeTokenHandler(token) {
+            var form = document.getElementById('payment-form');
+            var hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'stripe_token');
+            hiddenInput.setAttribute('value', token.id);
+            form.appendChild(hiddenInput);
+
+            form.submit();
+        }
+    </script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 </body>
 </html>
+
+{% endblock %}

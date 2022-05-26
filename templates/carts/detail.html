@@ -28,32 +28,23 @@
               </div>
               <div class="col-md-3 col-lg-3 col-xl-3">
                 <p class="lead fw-normal mb-2">{{product.name}}</p>
-                <p><span class="text-muted">Size: </span>M <span class="text-muted">Color: </span>Grey</p>
+
               </div>
               <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
                 <form action="{% url 'cart:cart_add' product.id %}" method="post">
                   {% csrf_token %}
-                {{item.update_quantity_form.quantity}}
+                {{item.quantity}}
 
-                <button class="btn btn-link px-2"
-                  onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                  <i class="fas fa-minus"></i>
-                </button>
 
-                <input id="form1" min="0" name="quantity" value="2" type="number"
-                  class="form-control form-control-sm" />
 
-                <button class="btn btn-link px-2"
-                  onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                  <i class="fas fa-plus"></i>
-                </button>
+
                 </form>
               </div>
               <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                 <h5 class="mb-0">${{item.total_price}}</h5>
               </div>
               <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
+                <a href="{% url 'cart:cart_remove' product.id %}" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
               </div>
             </div>
 
@@ -72,6 +63,8 @@
             <a href="{% url 'orders:order_create' %}"  button type="button" class="btn btn-warning btn-block btn-lg">Proceed to Pay</button></a>
           </div>
         </div>
+
+
 
       </div>
     </div>

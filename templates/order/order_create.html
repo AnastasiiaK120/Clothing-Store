@@ -18,62 +18,19 @@
 
 				<hr>
 				<h4 class="py-2 font-weight-bold text-grey">
-					Transport:
+					Shipping summary:<br>
+					<h6>Courier delivery: ${{transport_cost}}</h6><br>
+
+					<h6>Recipient pickup: Free</h6>
+
 				</h4>
 				<div class="row">
 					<div class="col-md-12">
-						<div class="radiobtn">
-							<input type="radio" id="id_transport_0" name="transport"
-								   value="Courier delivery" amount="{{ transport_cost }}"
-								   checked onclick="setTotalCost()"/>
-							<label for="id_transport_0">Courier delivery
-								<span class="text-danger float-right pr-3 font-weight-bold">
-									${{transport_cost}}
-								</span>
-							</label>
-						</div>
-						<div class="radiobtn">
-							<input type="radio" id="id_transport_1" name="transport"
-								   value="Recipient pickup" amount="free"
-								   onclick="setTotalCost()"/>
-							<label for="id_transport_0">Recipient pickup
-								<span class="text-green float-right pr-3 font-weight-bold">
-									free
-								</span>
-							</label>
-						</div>
+
 					</div>
 				</div>
 
-				<div class="row bg-light m-0">
-                            <div class="col-12 px-4 my-4">
-                                <p class="fw-bold">Payment detail</p>
-                            </div>
-                            <div class="col-12 px-4">
-                                <div class="d-flex  mb-4">
-                                    <span class="">
-                                        <p class="text-muted">Card number</p>
-                                        <input class="form-control" type="text" value="4485 6888 2359 1498"
-                                            placeholder="1234 5678 9012 3456">
-                                    </span>
-                                    <div class=" w-100 d-flex flex-column align-items-end">
-                                        <p class="text-muted">Expires</p>
-                                        <input class="form-control2" type="text" value="01/2020" placeholder="MM/YYYY">
-                                    </div>
-                                </div>
-                                <div class="d-flex mb-5">
-                                    <span class="me-5">
-                                        <p class="text-muted">Cardholder name</p>
-                                        <input class="form-control" type="text" value="David J.Frias"
-                                            placeholder="Name">
-                                    </span>
-                                    <div class="w-100 d-flex flex-column align-items-end">
-                                        <p class="text-muted">CVC</p>
-                                        <input class="form-control3" type="text" value="630" placeholder="XXX">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
 
 				<hr>
 
@@ -82,6 +39,7 @@
 				<button type="submit" class="btn btn-primary bt-lg btn-block" >Continue to Checkout</button>
 				<hr>
 			</form>
+
 		</div>
 
 

@@ -37,6 +37,7 @@ def cart_add(request, product_id):
     return redirect('cart:cart_detail')
 
 
+
 def cart_detail(request):
     cart = get_cart(request)
     product_ids = cart.keys()
@@ -49,7 +50,9 @@ def cart_detail(request):
         cart_item['product'] = product
         cart_item['total_price'] = (Decimal(cart_item['price']) * cart_item['quantity'])
         cart_total_price = sum(Decimal(item['price']) * item['quantity'] for item in temp_cart.values())
-
+        # remove_from_cart = request.GET.get('remove_from_cart', '')
+        # if remove_from_cart:
+        #     cart.cart_remove(remove_from_cart)
         cart_item['update_quantity_form'] = CartAddProductForm(initial={'quantity': cart_item['quantity']})
     return render(request, 'carts/detail.html', {'cart': temp_cart.values(),
                                            'cart_total_price': cart_total_price})

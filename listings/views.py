@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
@@ -9,7 +10,8 @@ from cart.forms import CartAddProductForm
 
 def front(request):
     products = Product.objects.all()[:8]
-    return render(request, 'product/front.html', {'products': products})
+    products_old = Product.objects.order_by('-price')[:4]
+    return render(request, 'product/front.html', {'products': products, 'products_old': products_old})
 
 
 def product_list(request):
@@ -17,6 +19,10 @@ def product_list(request):
     products = Product.objects.all()
 
     active_category = request.GET.get('category', '')
+
+    query = request.GET.get('query', '')
+    if query:
+        products = products.filter(Q(name__icontains=query) | Q(description__icontains=query))
 
     if active_category:
         products = products.filter(category__slug=active_category)

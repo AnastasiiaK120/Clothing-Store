@@ -31,7 +31,7 @@
 }
 
 .product-info {
-    max-width: 584px;
+    min-width: 500px;
 }
 
 

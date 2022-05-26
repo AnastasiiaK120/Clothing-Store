@@ -14,9 +14,9 @@
                     <div class="search">
                         <h3 class="mb-3 text-xl uppercase">Search</h3>
 
-                <form>
+                <form method="get" action=".">
                     <div class="flex">
-                        <input type="text" class="p-4 bg-gray-100 border-0" placeholder="Search...">
+                        <input type="text"  name="query" class="p-4 bg-gray-100 border-0" placeholder="Search..." style="border-bottom: 1px solid #f48fb1;box-shadow: 0 1px 0 0 #f48fb1;">
                         <buton class="p-4 bg-gray-100  border-0">
 
                         </buton>
@@ -26,7 +26,7 @@
                     <div class="categories">
                         <h3 class="mt-6 mb-3 text-xl uppercase">Categories</h3>
 
-                <ul class="space-y-2">
+                <ul class="space-y-2" style="list-style-type: none;" >
                     <li><a href="{% url 'listings:shop' %}" class="{% if not active_category %}text-pink-500{% else %}text-gray-500{% endif %}">All</a></li>
                     {% for category in categories %}
                     <li><a href="{% url 'listings:shop' %}?category={{category.slug}}" class="{% if category.slug == active_category %}text-pink-500{% else %}text-gray-500{% endif %}">{{category.name}}</a></li>

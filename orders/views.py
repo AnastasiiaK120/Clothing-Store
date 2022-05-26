@@ -1,3 +1,6 @@
+
+from django.conf import settings
+from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from decimal import Decimal
 from django.contrib.admin.views.decorators import staff_member_required
@@ -5,6 +8,8 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 import weasyprint
+from django.urls import reverse
+
 from store.decorators import user_create_order
 from .models import OrderItems, Order, Product
 from .forms import OrderCreateForm
@@ -44,9 +49,10 @@ def order_create(request):
                     price=cart_item['price'],
                     quantity=cart_item['quantity']
                 )
+
+
                 cart_clear(request)
 
-                order_created.delay(order.id)
                 return render(request, 'order/order_created.html', {'order': order})
     else:
         order_form = OrderCreateForm()
