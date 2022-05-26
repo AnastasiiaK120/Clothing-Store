@@ -29,8 +29,6 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-STRIPE_PUB_KEY = 'pk_test_51Jf7LnAvuybkDXhsh3LgBxBvWFozJZGT7VD9Ut9EylNEOOncthHy3FWxfISmyeEh2SiCNmrEsH2P6889s2U1DCSe00v4jiQffl'
-STRIPE_PRIVATE_KEY = 'sk_test_51Jf7LnAvuybkDXhsav9l53W1LvFpVMuSD0gLnifuUV2gSfziMzYgqFXZ2hazxK6rds6rzNZzMsZf9KRYfV7ZGMax00L6eJgKi5'
 
 # Application definition
 
