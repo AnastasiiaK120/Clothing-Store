@@ -133,3 +133,7 @@ line-height: 144.5%;
 .product-info-shop {
     /* max-width: 584px; */
 }
+
+.textarea content_nc{
+    width: 600px;
+}

@@ -70,32 +70,6 @@ def order_create(request):
                    'transport_cost': transport_cost})
 
 
-# @staff_member_required
-# def invoice_pdf(request, order_id):
-#     order = get_object_or_404(Order, id=order_id)
-#     response = HttpResponse(content_type='application/pdf')
-#     response['Content-Disposition'] = f'filename=order_{order.id}.pdf'
-#
-#     #generate pdf
-#     html = render_to_string('order/pdf.html', {'order': order})
-#     stylesheets = []
-#     weasyprint.HTML(string=html).write_pdf(response, stylesheets=stylesheets)
-#     return response
-#
-
-# @user_create_order
-# def customer_invoice_pdf(request, order_id):
-#     order = get_object_or_404(Order, id=order_id)
-#
-#     response = HttpResponse(content_type='application/pdf')
-#     response['Content-Disposition'] = f'filename=order_{order.id}.pdf'
-#
-#     # generate pdf
-#     html = render_to_string('order/pdf.html', {'order': order})
-#     stylesheets = []
-#     weasyprint.HTML(string=html).write_pdf(response, stylesheets=stylesheets)
-#     return response
-
 def invoice_pdf(request, order_id):
     order = get_object_or_404(Order, id=order_id)
 
@@ -107,6 +81,7 @@ def invoice_pdf(request, order_id):
     stylesheets = []
     weasyprint.HTML(string=html).write_pdf(response, stylesheets=stylesheets)
     return response
+
 
 def order_detail(request, order_id):
     order = Order.objects.get(pk=order_id)

@@ -101,7 +101,7 @@ $(document).ready(function() {
     <nav class="nav">
         <div class="container">
             <div class="nav_row">
-                <a href="#" class="nav_logo">
+                <a href="{% url 'listings:shop' %}" class="nav_logo">
                     Elegance
                 </a>
                 <ul class="nav_list">
@@ -118,6 +118,31 @@ $(document).ready(function() {
                         <a href="#" class="nav_link">Sale</a>
                     </li>
                 </ul>
+                <div class="account_link">
+                    <ul class="nav_list">
+                        {% if request.user.is_authenticated %}
+                            <li class="nav_item">
+                                <a href="{% url 'profile' %}" class="nav_link">
+                                    <i class="fas fa-user"></i>{{request.user.email}}
+                                </a>
+                            </li>
+                        <li class="nav_item">
+                            <a href="{% url 'logout' %}" class="nav_link">
+                                 <i class="fas fa-user"></i>Log out</a>
+                        </li>
+                        {% else %}
+                            <li class="nav_item">
+                                <a href="{% url 'login' %}" class="nav_link">
+                                    <i class="fas fa-user"></i>Log in</a>
+                                </a>
+                            </li>
+                            <li class="nav_item">
+                                <a href="{% url 'register' %}" class="nav_link">
+                                    <i class="fas fa-user"></i>Register</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
                 <div class="nav_card">
                     <a href="{% url 'cart:cart_detail' %}" class="nav__cart__link">
                         <span class="nav__cart-number">{{ cart_total_price|floatformat:2 }}</span>

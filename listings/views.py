@@ -28,21 +28,44 @@ def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug)
 
     if request.method == 'POST':
+        # rating = request.POST.get('rating', 3)
+        # content = request.POST.get('content', '')
+        #
+        # if content:
+        #     reviews = Review.objects.filter(author=request.user, product=product)
+        #
+        #     if reviews.count() > 0:
+        #         review = reviews.first()
+        #         review.rating = rating
+        #         review.content = content
+        #         review.save()
+        #     else:
+        #         review = Review.objects.create(
+        #             product=product,
+        #             rating=rating,
+        #             text=content,
+        #             author=request.user
+        #         )
+        #
+        #     return redirect('listings:product', slug=slug)
         review_form = ReviewForm(request.POST)
 
         if review_form.is_valid():
             cf = review_form.cleaned_data
-            author_name = 'Anonymous'
+            # author_name = 'Anonymous'
+            author = request.user
             # if request.user.is_authenticated:
             #     author_name = request.user.first_name
 
-            Review.objects.create(product=product, author=author_name, text=cf['text'], rating=cf['rating'])
+            Review.objects.create(product=product, author=author, text=cf['text'], rating=cf['rating'])
         return redirect('listings:product', slug=slug)
     else:
         review_form = ReviewForm()
         cart_product_form = CartAddProductForm()
 
     return render(request, 'product/product_detail.html', {'product': product, 'review_form': review_form, 'cart_product_form': cart_product_form})
+    # return render(request, 'product/product_detail.html',
+    #               {'product': product})
 
 
 def submit_review(request, product):

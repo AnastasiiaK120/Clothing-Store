@@ -37,6 +37,7 @@ def order_created(order_id):
     weasyprint.HTML(string=html).write_pdf(out, stylesheets=stylesheets)
     # attach PDF file
     email.attach(f'order_{order.id}.pdf', out.getvalue(), 'application/pdf')
+    email.send()
 
 
 @shared_task

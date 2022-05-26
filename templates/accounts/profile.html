@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <div class="shadow-custom messages alert alert-danger text-center col-lg-7 mx-auto">
+            {% else %}
+                 <div class="shadow-custom messages alert alert-success text-center col-lg-7 mx-auto">
+                     {% endif %}
+                     {{ message }}
+                     <a href="" class="close">x</a>
+                </div>
+                    {% endfor %}
+                    {% endif %}
+
+<div class="container-xl px-4 mt-4">
+    <!-- Account page navigation-->
+    <nav class="nav nav-borders">
+        <a class="nav-link active ms-0" href="https://www.bootdey.com/snippets/view/bs5-edit-profile-account-details" target="__blank">Profile</a>
+        <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-billing-page" target="__blank">Billing</a>
+        <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-security-page" target="__blank">Security</a>
+        <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-edit-notifications-page"  target="__blank">Notifications</a>
+    </nav>
+    <hr class="mt-0 mb-4">
+    <div class="row">
+        <div class="col-xl-4">
+            <!-- Profile picture card-->
+            <div class="card mb-4 mb-xl-0">
+                <div class="card-header">My Orders</div>
+                <div class="card-body text-center">
+                    {% for order in request.user.orders.all %}
+                    <tr>
+                        <td>
+                            <a href="{{ order.get_absolute_url }}" class="text-decoration-none">
+                                {{ order.id }}
+                            </a>
+                        </td>
+                        <td>{{order.created|date}}</td>
+                        <td class="text-green">
+                            ${{order.get_total_cost|floatformat:2}}
+                        </td>
+                        <td>
+                            <a href="{% url 'orders:customer_invoice_pdf' order.id %}" class="text-decoration-none" target="_blank">
+                                <i class="far fa-file-pdf text-danger"></i>
+                                Invoice {{ order.id }}
+                            </a>
+                        </td>
+                        <td>{{order.status}}</td>
+                    </tr><br>
+                    {% empty %}
+                        <tr>
+                            No orders yet
+                        </tr>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-8">
+            <!-- Account details card-->
+            <div class="card mb-4">
+                <div class="card-header">Account Details</div>
+                <div class="card-body">
+                    <form action="" method="post">
+                    {% csrf_token %}
+                  <p>Please login to your account</p>
+                   {{ user_form.as_p}}
+                    {{ profile_form.as_p }}
+                        <!-- Form Group (username)-->
+
+                        <!-- Save changes button-->
+                        <button class="btn btn-primary" type="submit">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

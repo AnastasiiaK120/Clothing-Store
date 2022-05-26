@@ -148,24 +148,21 @@
 			<i class="fa fa-star{% if single_product.averageReview < 4.5 %}-o{% elif single_product.averageReview >= 4.5 and single_product.averageReview < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
 	<span>{{single_product.countReview}} reviews</span>
 			</span>
-	</div>
+	</div><br>
 
 </header>
 
 {% for review in product.reviews.all %}
-				<article class="box mb-3">
+				<article class="box mb-3" style="border-block-style: solid;border-block-color: beige;">
 					<div class="icontext w-100">
 
 						<div class="text">
 							<span class="date text-muted float-md-right">{{review.created}} </span>
-							<h6 class="mb-1">{{review.author}} </h6>
+							<h6 class="mb-1">Author: {{review.author}} </h6>
 							<div class="rating-star">
 								<span>
-									<i class="fa fa-star{% if review.rating == 0.5 %}-half-o{% elif review.rating < 1 %}-o {% endif %}" aria-hidden="true"></i>
-									<i class="fa fa-star{% if review.rating == 1.5 %}-half-o{% elif review.rating < 2 %}-o {% endif %}" aria-hidden="true"></i>
-									<i class="fa fa-star{% if review.rating == 2.5 %}-half-o{% elif review.rating < 3 %}-o {% endif %}" aria-hidden="true"></i>
-									<i class="fa fa-star{% if review.rating == 3.5 %}-half-o{% elif review.rating < 4 %}-o {% endif %}" aria-hidden="true"></i>
-									<i class="fa fa-star{% if review.rating == 4.5 %}-half-o{% elif review.rating < 5 %}-o {% endif %}" aria-hidden="true"></i>
+
+									<strong>Rating:</strong> {{ review.rating }}/5<br>
 								</span>
 							</div>
 						</div>
@@ -191,4 +188,3 @@
 
 
 {% endblock %}
-
